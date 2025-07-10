@@ -10,7 +10,7 @@ A modern RESTful API built with **Java 21** and **Spring Boot 3** demonstrating 
 - Integration with **H2 in-memory database (JDBC API)** and **PostgreSQL** (via Docker Compose)
 - Clean layered architecture: Controller → Service → Repository
 - Exception handling and input validation
-- REST API client implemented using `RestTemplate`
+- REST API client implemented using `RestClient`
 - Thorough testing covering unit, integration, and slice tests
 
 ---
