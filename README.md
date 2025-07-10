@@ -1,6 +1,6 @@
 # Java Spring Boot 3 REST API
 
-A modern RESTful API built with **Java 17** and **Spring Boot 3** demonstrating backend best practices including database integration, layered architecture, and comprehensive testing.
+A modern RESTful API built with **Java 21** and **Spring Boot 3** demonstrating backend best practices including database integration, layered architecture, and comprehensive testing.
 
 ---
 
@@ -17,7 +17,7 @@ A modern RESTful API built with **Java 17** and **Spring Boot 3** demonstrating 
 
 ## 🛠️ Technologies Used
 
-- **Languages & Frameworks:** Java 17, Spring Boot 3, Spring Web, Spring Data JPA
+- **Languages & Frameworks:** Java 21, Spring Boot 3, Spring Web, Spring Data JPA
 - **Databases:** H2 (in-memory with JDBC), PostgreSQL (Docker Compose)
 - **Tools:** Maven, Docker, IntelliJ IDEA
 - **Testing:** JUnit 5, Mockito
