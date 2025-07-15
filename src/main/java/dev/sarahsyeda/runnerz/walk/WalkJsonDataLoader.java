@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 @Component
 public class WalkJsonDataLoader implements CommandLineRunner {
-    
+
     private static final Logger log = LoggerFactory.getLogger(WalkJsonDataLoader.class);
     private final WalkRepository walkRepository;
     public final ObjectMapper objectMapper;
@@ -26,11 +26,13 @@ public class WalkJsonDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("walkjsondataloader started");
         if(walkRepository.count() == 0){
             try(InputStream inputStream = TypeReference.class.getResourceAsStream("/data/walks.json")){
                 //reading json, map that json, deserialize into a list of walks (objects)
                 Walks allWalks = objectMapper.readValue(inputStream, Walks.class);
                 log.info("Reading {} walks from JSON data and saving to database.", allWalks.walks().size());
+                System.out.println("about to save");
                 walkRepository.saveAll(allWalks.walks());
             } catch (IOException e){
                 throw new RuntimeException("Failed to read JSON data", e);

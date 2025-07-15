@@ -68,21 +68,21 @@ public class JdbcClientWalkRepository {
     }
 
     public List<Walk> findAll() {
-        return jdbcClient.sql("select * from run")
+        return jdbcClient.sql("select * from walk")
                 .query(Walk.class)
                 .list();
 
     }
 
     public Optional<Walk> findById(Integer id){
-        return jdbcClient.sql("SELECT id,title,started_on,completed_on,distance_km,location FROM Run WHERE id = :id")
+        return jdbcClient.sql("SELECT id,title,started_on,completed_on,distance_km,location FROM Walk WHERE id = :id")
                 .param("id",id)
                 .query(Walk.class)
                 .optional();
     }
 
     public void create(Walk walk){
-        var updated = jdbcClient.sql("INSERT INTO Run(id,title,started_on,completed_on,distance_km,location) values(?,?,?,?,?,?)")
+        var updated = jdbcClient.sql("INSERT INTO Walk(id,title,started_on,completed_on,distance_km,location) values(?,?,?,?,?,?)")
                 .params(List.of(walk.id(),walk.title(),walk.startedOn(),walk.completedOn(),walk.distanceKm(),walk.location().toString()))
                 .update();
 
@@ -90,25 +90,25 @@ public class JdbcClientWalkRepository {
     }
 
     public void update(Walk walk, Integer id){
-        var updated = jdbcClient.sql("update run set title = ?, started_on = ?, completed_on = ?, distance_km = ?, location = ? where id = ?")
+        var updated = jdbcClient.sql("update walk set title = ?, started_on = ?, completed_on = ?, distance_km = ?, location = ? where id = ?")
                 .params(List.of(walk.title(), walk.startedOn(), walk.completedOn(), walk.distanceKm(), walk.location().toString(), id))
                 .update();
         Assert.state(updated==1, "Failed to update walk " + walk.title());
     }
 
     public void delete(Integer id){
-        var updated = jdbcClient.sql("delete from run where id = :id")
-                .params("id", id)
+        var updated = jdbcClient.sql("delete from walk where id = :id")
+                .param("id", id)
                 .update();
-        Assert.state(updated==1, "Failed to delete run" + id);
+        Assert.state(updated==1, "Failed to delete walk" + id);
     }
 
-    public int count() {return jdbcClient.sql("select * from run").query().listOfRows().size();}
+    public int count() {return jdbcClient.sql("select * from walk").query().listOfRows().size();}
 
     public void saveAll(List<Walk> walks) {walks.stream().forEach(this::create);}
 
     public List<Walk> findByLocation(String location){
-        return jdbcClient.sql("select * from run where location = :location")
+        return jdbcClient.sql("select * from walk where location = :location")
                 .param("location", location)
                 .query(Walk.class)
                 .list();
